@@ -2,8 +2,8 @@
 DATE=$(date +%x-%T)
 echo $DATE
 echo "Please enter name:"
-read name
-if [ $name -eq venkat ]
+read "name"
+if [ $name -eq "venkat" ]
 then
     echo "Welcome to Devops"
 else

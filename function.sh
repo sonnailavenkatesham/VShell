@@ -9,5 +9,5 @@ VALIDATE(){
     fi
 }
 
-yum install git -y
+yum install gitt -y
 VALIDATE $? "git"

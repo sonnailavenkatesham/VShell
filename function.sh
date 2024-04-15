@@ -9,5 +9,5 @@ VALIDATE(){
     fi
 }
 
-echo "Hello Rakesh"
-VALIDATE $?
+echo ls "Hello Rakesh"
+VALIDATE $? 

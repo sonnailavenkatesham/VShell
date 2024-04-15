@@ -7,9 +7,9 @@ N="\e[0m"
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo "$G $2 success $N ..done"
+        echo -e "$G $2 success $N ..done"
     else
-        echo "$R $2 failded $N "
+        echo -e "$R $2 failded $N "
     fi
 }
 

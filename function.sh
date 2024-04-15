@@ -3,6 +3,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+file=/tmp/git.log
 
 VALIDATE(){
     if [ $1 -eq 0 ]
@@ -13,5 +14,5 @@ VALIDATE(){
     fi
 }
 
-yum install git -y
+yum install git -y &>> $file
 VALIDATE $? "git"

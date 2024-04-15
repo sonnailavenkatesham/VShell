@@ -3,11 +3,11 @@
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo "success"
+        echo " $1 success  $2"
     else
-        echo "Failed"
+        echo "$2"
     fi
 }
 
-ls "Hello Rakesh"
-VALIDATE $? 
+echo "Hello Rakesh"
+VALIDATE $? "Hello"

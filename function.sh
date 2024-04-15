@@ -1,14 +1,13 @@
 #!/bin/bash
 
 VALIDATE(){
-    if [ $1 -ne 0 ]
+    if [ $1 -eq 0 ]
     then
-        echo -e "$R $2....FAILED $N"
-        exit 1
+        echo "success"
     else
-        echo -e "$G $2....SUCCESSFULL $N"
+        echo "Failed"
     fi
 }
 
 echo "Hello Rakesh"
-# VALIDATE $? "module disable nodejs"
+VALIDATE $?

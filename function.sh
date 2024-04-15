@@ -1,11 +1,15 @@
 #!/bin/bash
+R="\e[31m"
+G="\e[32m"
+Y="\e[33m"
+N="\e[0m"
 
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo " $2 success"
+        echo "$G $2 success $N ..done"
     else
-        echo "$2 failded"
+        echo "$R $2 failded $N "
     fi
 }
 

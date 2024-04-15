@@ -2,7 +2,7 @@
 DATE=$(date +%x-%T)
 echo $DATE
 echo "Please enter name:"
-
+read name
 
 
 

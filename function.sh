@@ -3,11 +3,11 @@
 VALIDATE(){
     if [ $1 -eq 0 ]
     then
-        echo " $1 success  $2"
+        echo " $2 success"
     else
-        echo "$1 ....$2"
+        echo "$2 failded"
     fi
 }
 
-ls "Hello Rakesh"
-VALIDATE $? "Hello"
+yum install git -y
+VALIDATE $? "git"

@@ -8,7 +8,7 @@ then
     echo "Welcome to Devops"
 else
     echo "Please provide correct name"
-    exit1
+    exit 1
 fi
 
 

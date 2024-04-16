@@ -16,13 +16,13 @@ VALIDATE(){
     fi
 }
 
-dnf module disable nodejs -y
+dnf module disable nodejs -y &>> $path
 VALIDATE $? "disable nodejs"
 
-dnf module enable nodejs:18 -y
+dnf module enable nodejs:18 -y &>> $path
 VALIDATE $? "enabling nodejs"
 
-dnf install nodejs -y
+dnf install nodejs -y &>> $path
 VALIDATE $? "installing nodejs"
 
 if [ id roboshop -ne 0 ]
@@ -41,36 +41,36 @@ else
     echo -e "$G app directory created $N"
 fi
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $path
 VALIDATE $? "downloded artifact"
 
-cd /app 
+cd /app &>> $path
 VALIDATE $? "changing to app directory"
 
-unzip /tmp/catalogue.zip
+unzip /tmp/catalogue.zip &>> $path
 VALIDATE $? "unzipping artifact"
 
-npm install 
+npm install &>> $path
 VALIDATE $? "npm installing"
 
 
-cp /home/centos/vshell/scripting/catalogue.service /etc/systemd/system/catalogue.service
+cp /home/centos/vshell/scripting/catalogue.service /etc/systemd/system/catalogue.service &>> $path
 VALIDATE $? "copying catalogue.service"
 
-systemctl daemon-reload
+systemctl daemon-reload &>> $path
 VALIDATE $? "daemon-reload"
 
-systemctl enable catalogue
+systemctl enable catalogue &>> $path
 VALIDATE $? "enabling catalogue"
 
-systemctl start catalogue
+systemctl start catalogue &>> $path
 VALIDATE $? "starting catalogue"
 
-cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo &>> $path
 VALIDATE $? "dcopying mongo.repo"
 
-dnf install mongodb-org-shell -y
+dnf install mongodb-org-shell -y &>> $path
 VALIDATE $? "installing mongodb-org-shell"
 
-mongo --host 172.31.30.115 </app/schema/catalogue.js
+mongo --host 172.31.30.115 </app/schema/catalogue.js &>> $path
 VALIDATE $? "conneting mongodb"

@@ -35,7 +35,7 @@ fi
 
 if [ -d "/app" ]; 
 then
-  echo "$Y app directory laready exist. $N"
+  echo -e "$Y app directory laready exist. $N"
 else
     mkdir /app
     echo -e "$G app directory created $N"

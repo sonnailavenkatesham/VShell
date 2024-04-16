@@ -3,6 +3,7 @@ R="\e[31m"
 G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
+path=/tmp/mongodb.logs
 
 VALIDATE(){
     if [ $1 -eq 0 ]
@@ -14,23 +15,23 @@ VALIDATE(){
     fi
 }
 
-cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo
-VALIDATE $? "Copiing repo"
+cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo &>> $path
+VALIDATE $? "Copiing repo" 
 
 
-yum install mongodb-org -y
+yum install mongodb-org -y &>> $path
 VALIDATE $? "installing mongodb-org "
 
 
-systemctl enable mongod
+systemctl enable mongod &>> $path
 VALIDATE $? "enable mongod"
 
 
-systemctl start mongod
+systemctl start mongod &>> $path
 VALIDATE $? "starting mongod "
 
-sed 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
+sed 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf &>> $path
 VALIDATE $? "replacing with 0.0.0.0 "
 
-systemctl restart mongod
+systemctl restart mongod &>> $path
 VALIDATE $? "restarted mongod "

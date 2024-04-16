@@ -25,17 +25,21 @@ VALIDATE $? "enabling nodejs"
 dnf install nodejs -y
 VALIDATE $? "installing nodejs"
 
-if [ -d /app ]; 
+if [ id roboshop -ne 0 ]
 then
-  echo "$Y app directory laready exist. $N"
-else
     useradd roboshop
-    echo -e "$G roboshop user created $N"
+else    
+    echo -e "$Y user roboshop is already exist $N"
 fi
 
 
-mkdir /app
-VALIDATE $? "created app directory"
+if [ -d "/app" ]; 
+then
+  echo "$Y app directory laready exist. $N"
+else
+    mkdir /app
+    echo -e "$G app directory created $N"
+fi
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip
 VALIDATE $? "downloded artifact"

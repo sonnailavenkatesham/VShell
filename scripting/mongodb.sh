@@ -4,59 +4,33 @@ G="\e[32m"
 Y="\e[33m"
 N="\e[0m"
 
-
+VALIDATE(){
+    if [ $1 -eq 0 ]
+    then
+        echo -e "$G $2 SUCCESS$N"
+    else
+        echo -e "$R $2 FAILED $N"
+        exit 1
+    fi
+}
 
 cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo
+VALIDATE $? "Copiing repo"
 
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
 
 yum install mongodb-org -y
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
+VALIDATE $? "installing mongodb-org "
+
 
 systemctl enable mongod
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
+VALIDATE $? "enable mongod"
+
 
 systemctl start mongod
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
+VALIDATE $? "starting mongod "
 
 sed 's/127.0.0.1/0.0.0.0/g' /etc/mongod.conf
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
+VALIDATE $? "replacing with 0.0.0.0 "
 
 systemctl restart mongod
-if [ $? -eq 0 ]
-then
-    echo -e "$G SUCCESS$N"
-else
-    echo -e "$R FAILED $N"
-    exit 1
-fi
+VALIDATE $? "restarted mongod "

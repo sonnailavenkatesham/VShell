@@ -19,7 +19,7 @@ cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo &>> $pat
 VALIDATE $? "Copiing repo" 
 
 
-yum install mongodb-org -y &>> $path
+yum install mongodb-or -y &>> $path
 VALIDATE $? "installing mongodb-org "
 
 

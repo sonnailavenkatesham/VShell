@@ -25,8 +25,14 @@ VALIDATE $? "enabling nodejs"
 dnf install nodejs -y
 VALIDATE $? "installing nodejs"
 
-useradd roboshop
-VALIDATE $? "roboshop user added"
+if [ -d /app ]; 
+then
+  echo "$Y app directory laready exist. $N"
+else
+    useradd roboshop
+    echo -e "$G roboshop user created $N"
+fi
+
 
 mkdir /app
 VALIDATE $? "created app directory"

@@ -6,7 +6,7 @@ N="\e[0m"
 
 
 
-cp /home/centos/vshell/scriptin/gmongo.repo /etc/yum.repos.d/mongo.repo
+cp /home/centos/vshell/scripting/mongo.repo /etc/yum.repos.d/mongo.repo
 
 if [ $? -eq 0 ]
 then

@@ -50,7 +50,7 @@ VALIDATE $? "changing to app directory"
 unzip /tmp/catalogue.zip &>> $path
 VALIDATE $? "unzipping artifact"
 
-npm install &>> $path
+npm install
 VALIDATE $? "npm installing"
 
 

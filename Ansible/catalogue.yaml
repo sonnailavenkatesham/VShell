@@ -60,5 +60,5 @@
       state: installed
 
   - name: loading Schema
-    ansible.builtin.shell: mongo --host mongodb.venkateshamsonnalia143.online < /app/schema/catalogue.js
+    ansible.builtin.command: mongo --host mongodb.venkateshamsonnalia143.online < /app/schema/catalogue.js
     tags: schema

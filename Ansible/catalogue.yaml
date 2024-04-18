@@ -46,7 +46,7 @@
   - name: enable and starting catalogue
     ansible.builtin.service:
       name: catalogue
-      enalbed: true
+      enabled: true
       state: started
   
   - name: copying mongo.repo

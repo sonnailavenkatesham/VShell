@@ -33,7 +33,7 @@
     ansible.builtin.shell: npm install
     args:
       chdir: /app
-      
+
   - name: copying catalogue.service
     ansible.builtin.copy:
       src: catalogue.service
@@ -41,7 +41,6 @@
 
   - name: Make sure a service unit is running
     ansible.builtin.systemd_service:
-      name: catalogue
       daemona_reload: true
   
   - name: enable and starting catalogue

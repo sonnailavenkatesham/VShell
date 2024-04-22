@@ -29,20 +29,20 @@ useradd roboshop
 
 mkdir /app
 
-curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $path
+curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip  
 VALIDATE $? "downloded artifact"
 
-cd /app &>> $path
+cd /app 
 VALIDATE $? "changing to app directory"
 
-unzip /tmp/catalogue.zip &>> $path
+unzip /tmp/catalogue.zip 
 VALIDATE $? "unzipping artifact"
 
-npm install &>> $path
+npm install 
 VALIDATE $? "npm installing"
 
 
-cp /home/centos/vshell/scripting/catalogue.service /etc/systemd/system/catalogue.service &>> $path
+cp /home/centos/vshell/scripting/catalogue.service /etc/systemd/system/catalogue.service
 VALIDATE $? "copying catalogue.service"
 
 systemctl daemon-reload &>> $path

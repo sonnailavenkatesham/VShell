@@ -25,15 +25,10 @@ VALIDATE $? "enabling nodejs"
 dnf install nodejs -y &>> $path
 VALIDATE $? "installing nodejs"
 
-if [ id roboshop -ne 0 ]
-then
-    useradd roboshop
-else    
-    echo -e "$Y user roboshop is already exist $N"
-fi
+useradd roboshop
 
 
-if [ -d "/app" ]; 
+if [ -d "/app" ]
 then
   echo -e "$Y app directory laready exist. $N"
 else
@@ -50,7 +45,7 @@ VALIDATE $? "changing to app directory"
 unzip /tmp/catalogue.zip &>> $path
 VALIDATE $? "unzipping artifact"
 
-npm install
+npm install &>> $path
 VALIDATE $? "npm installing"
 
 
@@ -72,5 +67,5 @@ VALIDATE $? "dcopying mongo.repo"
 dnf install mongodb-org-shell -y &>> $path
 VALIDATE $? "installing mongodb-org-shell"
 
-mongo --host 172.31.30.115 </app/schema/catalogue.js &>> $path
+mongo --host mongodb.venkateshamsonnalia143.online </app/schema/catalogue.js &>> $path
 VALIDATE $? "conneting mongodb"

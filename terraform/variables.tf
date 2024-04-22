@@ -1,4 +1,4 @@
 variable "instance_names" {
   type    = list(any)
-  default = ["mongodb", "catalogue", "web"]
+  default = ["mongodb", "catalogue", "user", "cart", "redis", "web"]
 }

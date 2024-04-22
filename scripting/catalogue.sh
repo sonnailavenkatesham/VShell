@@ -27,14 +27,7 @@ VALIDATE $? "installing nodejs"
 
 useradd roboshop
 
-
-if [ -d "/app" ]
-then
-  echo -e "$Y app directory laready exist. $N"
-else
-    mkdir /app
-    echo -e "$G app directory created $N"
-fi
+mkdir /app
 
 curl -o /tmp/catalogue.zip https://roboshop-builds.s3.amazonaws.com/catalogue.zip &>> $path
 VALIDATE $? "downloded artifact"

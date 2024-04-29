@@ -1,0 +1,64 @@
+- name: installing user
+  hosts: user
+  become: yes
+  tasks:
+  - name: module disabling nodejs
+    ansible.builtin.shell: dnf module disable nodejs -y
+  
+  - name: module enabling nodejs:18 -y
+    ansible.builtin.shell: dnf module enable nodejs:18 -y
+
+  - name: installing nodejs
+    ansible.builtin.yum:
+      name: nodejs
+      state: installed
+
+  - name: Adding the user 'roboshop'
+    ansible.builtin.user:
+      name: roboshop
+      state: present
+  
+  - name: Create a app directory 
+    ansible.builtin.file:
+      path: /app
+      state: directory
+  
+  - name: downloading Unarchive user artifact
+    ansible.builtin.unarchive:
+      src: https://roboshop-builds.s3.amazonaws.com/user.zip
+      dest: /app
+      remote_src: yes
+
+  - name: npm isntall
+    ansible.builtin.shell: npm install
+    args:
+      chdir: /app
+
+  - name: copying user.service
+    ansible.builtin.copy:
+      src: user.service
+      dest: /etc/systemd/system/user.service
+
+  - name: Make sure a service unit is running
+    ansible.builtin.systemd_service:
+      daemon_reload: true
+  
+  - name: enable and starting user
+    ansible.builtin.service:
+      name: user
+      enabled: true
+      state: started
+  
+  - name: copying mongo.repo
+    ansible.builtin.copy:
+      src: mongo.repo
+      dest: /etc/yum.repos.d/mongo.repo
+  
+  - name: istalling mongodb-org-shell
+    ansible.builtin.yum:
+      name: mongodb-org-shell
+      state: installed
+
+  - name: loading Schema
+    ansible.builtin.command: mongo --host mongodb.venkateshamsonnalia143.online < /app/schema/user.js
+    tags: schema
